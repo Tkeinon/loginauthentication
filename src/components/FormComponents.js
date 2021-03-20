@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: block;
   margin-bottom: 10px;
-  border: 1px solid black;
 `;
 
 const ErrorMsg = styled.p`
@@ -17,7 +16,7 @@ const TextInput = ( {label, ...props} ) => {
 
     return (
         <Container>
-            <label htmlFor={props.name} style={{border: "1px solid black"}}>{label}</label> <br/>
+            <label htmlFor={props.name}>{label}</label> <br/>
             <input {...field} {...props} />
             {meta.touched && meta.error ? (
                 <ErrorMsg>{meta.error}</ErrorMsg>
