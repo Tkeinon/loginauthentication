@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import styled, {createGlobalStyle} from 'styled-components';
-import Home from "./pages/home";
+import {createGlobalStyle} from 'styled-components';
+import Login from "./pages/login";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const GlobalStyle = createGlobalStyle`
     
@@ -18,7 +18,7 @@ function App() {
   return (
     <div>
       <GlobalStyle />
-      <Home />
+      <Login />
 
 
     </div>
