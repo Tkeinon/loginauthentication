@@ -1,11 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, useLocation} from "react-router-dom";
+import {Route, useLocation} from "react-router-dom";
 import Login from "../pages/login";
 import Signup from "../pages/signup";
-import {AuthContext} from "../context/authContext";
 import Navbar from "./Navbar";
 import Home from "../pages/home";
 import About from "../pages/about";
+import PrivateRoute from "./PrivateRoute";
 
 const Layout = () => {
     const location = useLocation();
@@ -19,12 +19,10 @@ const Layout = () => {
             <div>
                 <Navbar />
                 <Route exact path="/" component={Login} />
-                <Route path="/home" component={Home} />
-                <Route path="/about" component={About} />
                 <Route path="/signup" component={Signup} />
+                <PrivateRoute path="/home" component={Home} />
+                <PrivateRoute path="/about" component={About} />
             </div>
-
-
         );
     }
 }

@@ -1,9 +1,10 @@
 {
   "credentials": [
     {
-      "id": 1,
+      "name": "John doe",
       "email": "test@email.com",
-      "password": "qwe"
+      "password": "qwe",
+      "id": 1
     }
   ]
 }

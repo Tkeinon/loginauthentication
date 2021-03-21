@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {useAuth} from "../context/authContext";
 
 const NavContainer = styled.ul`
   list-style-type: none;
@@ -30,6 +31,12 @@ const NavItem = styled.li`
 
 
 const Navbar = () => {
+
+    const { setAuthTokens } = useAuth();
+
+    const logOut = () => {
+        setAuthTokens("")
+    }
     return (
         <NavContainer>
                     <NavItem>
@@ -39,7 +46,7 @@ const Navbar = () => {
                         <Link to="/about">About</Link>
                     </NavItem>
             <NavItem style={{float: "right"}}>
-                <Link to="/">Log out</Link>
+                <Link to="/" onClick={logOut}>Log out</Link>
             </NavItem>
         </NavContainer>
     )

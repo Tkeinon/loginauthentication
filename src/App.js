@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router } from "react-router-dom";
 
 import {AuthContext} from "./context/authContext";
-import React from "react";
+import React, {useState} from "react";
 import Layout from "./components/Layout";
 
 const GlobalStyle = createGlobalStyle`        
@@ -22,8 +22,16 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
 
+    const existingTokens = JSON.parse(localStorage.getItem("tokens"));
+    const [authTokens, setAuthTokens] = useState(existingTokens);
+
+    const setTokens = (data) => {
+        localStorage.setItem("tokens", JSON.stringify(data));
+        setAuthTokens(data);
+    }
+
     return (
-        <AuthContext.Provider value={false}>
+        <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens }}>
             <Router>
                 <GlobalStyle />
                 <Layout />

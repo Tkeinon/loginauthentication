@@ -1,8 +1,9 @@
 import React from 'react';
-import {Field, Form, Formik} from 'formik';
+import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import TextInput from "./FormikComponents";
 import {useHistory} from 'react-router-dom';
+import axios from "axios";
 
 const SignupForm = () => {
 
@@ -23,20 +24,22 @@ const SignupForm = () => {
                 confirmPassword: Yup.string().oneOf([Yup.ref('password')], 'Password must match')
             })}
             onSubmit={values => {
+
                 const signupInfo = {
                     name: values.name,
                     email: values.email,
                     password: values.password
                 }
-                console.log("Values: ", JSON.stringify(signupInfo).toString())
-                history.push("/")
+                axios.post("http://localhost:3001/credentials", signupInfo).then(
+                    history.push("/")
+                )
             }}
         >
-            {({errors, touched}) => (
+            {() => (
                 <Form>
                     <TextInput            label="Name"
-                                          id="email"
-                                          name="email"
+                                          id="name"
+                                          name="name"
                                           type="text"
 
                     />
@@ -58,7 +61,7 @@ const SignupForm = () => {
 
                     />
                     <button type="submit">Sign up!</button>
-                    <span style={{marginRight: "10px"}}></span>
+                    <span style={{marginRight: "10px"}} />
                     <button type="reset" onClick={() => history.push("/")}>Return</button>
                 </Form>
             )}

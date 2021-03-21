@@ -1,11 +1,14 @@
 import React from 'react';
-import {Form, Formik, Field} from 'formik';
+import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import TextInput from "./FormikComponents";
 import {useHistory} from 'react-router-dom';
+import axios from "axios";
+import {useAuth} from "../context/authContext";
 
 const LoginForm = () => {
     const history = useHistory();
+    const { setAuthTokens } = useAuth();
 
     return (
         <Formik
@@ -18,13 +21,21 @@ const LoginForm = () => {
             password: Yup.string().required('Enter password')
         })}
         onSubmit={values => {
-            const logInfo = {
-                email: values.email,
-                password: values.password
+            try {
+                // get credentials, compare given values and if match, redirect and authenticate
+                axios.get("http://localhost:3001/credentials")
+                    .then(function (response) {
+                        response.data.map(data => {
+                            if (values.email === data.email && values.password === data.password) {
+                                setAuthTokens(data)
+                                history.push("/home")
+                            }
+                        })
+                    })
+            } catch (e) {
+                console.error(e)
             }
-            history.push("/home")
 
-            console.log("Values: ", JSON.stringify(logInfo).toString())
         }}
         >
             {({errors, touched}) => (
