@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import image from '../images/gulnaz-shaidullina-vBos7bw98bY-unsplash.jpg';
 import LoginForm from "../components/LoginForm";
+import {Link} from "react-router-dom";
+import {Form} from "formik";
 
 const BackgroundContainer = styled.div`
   height: 100vh;
@@ -32,9 +34,8 @@ const Login = () => {
         <BackgroundContainer>
             <FormContainer>
                 <LoginForm />
-                <p>New user? Sign up here!</p>
+                <p>New user? Sign up <Link to="/signup">here!</Link></p>
             </FormContainer>
-
         </BackgroundContainer>
     )
 };

@@ -1,9 +1,11 @@
 import React from 'react';
-import {Form, Formik} from 'formik';
+import {Form, Formik, Field} from 'formik';
 import * as Yup from 'yup';
-import TextInput from "./FormComponents";
+import TextInput from "./FormikComponents";
+import {useHistory} from 'react-router-dom';
 
 const LoginForm = () => {
+    const history = useHistory();
 
     return (
         <Formik
@@ -20,29 +22,28 @@ const LoginForm = () => {
                 email: values.email,
                 password: values.password
             }
+            history.push("/home")
+
             console.log("Values: ", JSON.stringify(logInfo).toString())
         }}
         >
-            <Form>
-                <TextInput
-                label="Username/email"
-                id="email"
-                type="text"
-                name="email"
-                placeholder="Enter email"
-            />
-                <TextInput
-                    label="Password"
-                    id="password"
-                    type="text"
-                    name="password"
-                    placeholder="Enter password"
-                />
-                <button type="submit">Log in</button>
-            </Form>
+            {({errors, touched}) => (
+                <Form>
+                    <TextInput            label="Email"
+                                          id="email"
+                                          name="email"
+                                          type="email"
 
+                    />
+                    <TextInput            label="Password"
+                                          id="password"
+                                          name="password"
+                                          type="password"
+                    />
+                    <button type="submit">Log in</button>
+                </Form>
+            )}
         </Formik>
-
     )
 }
 

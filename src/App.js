@@ -1,9 +1,12 @@
 import {createGlobalStyle} from 'styled-components';
-import Login from "./pages/login";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router } from "react-router-dom";
 
-const GlobalStyle = createGlobalStyle`
-    
+import {AuthContext} from "./context/authContext";
+import React from "react";
+import Layout from "./components/Layout";
+
+const GlobalStyle = createGlobalStyle`        
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -14,15 +17,21 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+
+
+
 function App() {
-  return (
-    <div>
-      <GlobalStyle />
-      <Login />
+
+    return (
+        <AuthContext.Provider value={false}>
+            <Router>
+                <GlobalStyle />
+                <Layout />
+            </Router>
+        </AuthContext.Provider>
+    )
 
 
-    </div>
-  );
 }
 
 export default App;
